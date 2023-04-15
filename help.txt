@@ -1,0 +1,41 @@
+```
+goofy ahh bot
+prefix: erm/Erm
+commands are case-insensitive
+
+chat commands:
+  gpt                prompt unhinged chat-gpt
+
+  is it a beast      burger
+    or a burger
+    angle
+
+utility commands:
+  gif <url>          turns image into gif
+  omg <url>          ooo ma gad
+
+voice commands:
+  join               joins (hiiii)
+  play               plays a song (wow who wouda guessed(try to play demondice i dare you))
+  stop               stops playing
+  pause/unpause      pauses or smth
+  loop               loops or smth
+  leave              dies of banger
+  queue              shows current queue
+  skip               skips currently playing
+
+sound effects:
+  boowomp            insert spongebob frowning emote
+  feet               mmmm feet.....
+  huh                ???
+  lamb sauce         eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+  nerd               uhhh
+  steel sting        booooooooooooooooo doooooo-doooooooooooooooooooooooooooo
+  sus                amog
+  what the burger    ooo ma gad
+  what da hell       what da hell
+  you are black      you, you buraku
+
+the help message category:
+  help               this help message lol what did you think was gonna show up
+```
