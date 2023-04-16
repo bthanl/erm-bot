@@ -22,6 +22,8 @@ class soundEffects(commands.Cog):
         lol.play(discord.FFmpegPCMAudio("audio/mmfeet.mp3"))
     '''
 
+    #implement per-server sound effects + comamnd to add sounds?
+
     @commands.command()
     async def feet(self, ctx):
         await player.playSound(ctx, "audio/mmfeet.mp3", "mmm..... feet")
