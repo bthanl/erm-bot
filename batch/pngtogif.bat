@@ -1,3 +1,5 @@
+@echo off
+
 ffmpeg -hide_banner -loglevel error -i "%~1" %~dp0..\temp\%~n1a1.png -y
 
 ::height
