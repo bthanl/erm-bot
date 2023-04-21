@@ -20,6 +20,10 @@ bot = commands.Bot(
 
 )
 
+#create temp folder if doesnt exist/first run
+if not os.path.exists("temp"):
+    os.makedirs("temp")
+
 @bot.event
 async def on_ready():
     print(f'Logged in as {bot.user} (ID: {bot.user.id})')

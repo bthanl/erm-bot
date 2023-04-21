@@ -41,11 +41,11 @@ class util(commands.Cog):
         #if its not jhust get the normal url
         async with ctx.typing():
             subprocess.run("curl -s " + url + " --output temp/" + fileName)
-            subprocess.run("D:/Other/omg/omg.bat " + "temp/" + fileName)
+            subprocess.run(["cmd", "/c", "batch\omg.bat " + "temp/" + fileName])
         
-        #[:-4] is only valid for ext with 3 chars 
-        #eg .png .jpg, but not .webp etc
-        await util.uploadAndClearTemp(ctx, fileName[:-4] + "_new.gif")
+            #[:-4] is only valid for ext with 3 chars 
+            #eg .png .jpg, but not .webp etc
+            await util.uploadAndClearTemp(ctx, fileName[:-4] + "_new.gif")
 
 
         print("processed", url)
@@ -63,11 +63,11 @@ class util(commands.Cog):
 
         async with ctx.typing():
             subprocess.run("curl -sL " + url + " --output temp/" + fileName)
-            subprocess.run("D:/Other/gifski/gif/pngtogif.bat " + "temp/" + fileName)
+            subprocess.run(["cmd", "/c", "batch\pngtogif.bat " + "temp/" + fileName])
 
-        #[:-4] is only valid for ext with 3 chars 
-        #eg .png .jpg, but not .webp etc
-        await util.uploadAndClearTemp(ctx, fileName[:-4] + ".gif")
+            #[:-4] is only valid for ext with 3 chars 
+            #eg .png .jpg, but not .webp etc
+            await util.uploadAndClearTemp(ctx, fileName[:-4] + ".gif")
 
         print("turned", url, "into gif")
 

@@ -35,25 +35,26 @@ class voice(commands.Cog):
         if fuzz.ratio(url, "demondice") >= 90 or fuzz.ratio(url, "mori calliope") >= 90:
             await ctx.send("ill kill you")
             return
-
-        source = await YTDL.YTDLSource.from_url(url, loop = self.bot.loop, stream = False)
-
-        title = (source.title).lower()
-        desc = (source.data.get("description")).lower()
-        #top 5 lines of code of all time
-        if("demondice" in title or
-                "demondice" in desc or
-                "mori calliope" in title or
-                "mori calliope" in desc or
-                "moricalliope" in title or
-                "moricalliope" in desc):
-            await ctx.send("ill kill you")
-            return
-
-        ctx.voice_client.play(source, after=lambda e: print(f'Player error: {e}') if e else None)
         
-        await ctx.send(f'im playig ummm ermmmm... {source.title}')
-        print("playing:", source.title)
+        async with ctx.typing():
+            source = await YTDL.YTDLSource.from_url(url, loop = self.bot.loop, stream = False)
+
+            title = (source.title).lower()
+            desc = (source.data.get("description")).lower()
+            #top 5 lines of code of all time
+            if("demondice" in title or
+                    "demondice" in desc or
+                    "mori calliope" in title or
+                    "mori calliope" in desc or
+                    "moricalliope" in title or
+                    "moricalliope" in desc):
+                await ctx.send("ill kill you")
+                return
+
+            ctx.voice_client.play(source, after=lambda e: print(f'Player error: {e}') if e else None)
+            
+            await ctx.send(f'im playig ummm ermmmm... {source.title}')
+            print("playing:", source.title)
 
         #potentially high elo
         #unless they pause lol all good tho
