@@ -1,0 +1,4 @@
+discord.py==2.2.2
+fuzzywuzzy==0.18.0
+openai==0.27.2
+yt_dlp==2023.2.17
