@@ -3,9 +3,11 @@
 update .env with the proper keys
 
 ## requirements
-[gifski CLI binaries](https://gif.ski/) 
-gifski may be removed in the future
+[gifski CLI binaries](https://gif.ski/)
+
 [ffmpeg](https://ffmpeg.org/download.html)
 
+
+gifski may be removed in the future
 
 make sure to include them in PATH
