@@ -2,7 +2,7 @@
 
 update .env with the proper keys
 
-##requirements
+## requirements
 [gifski CLI binaries](https://gif.ski/) 
 gifski may be removed in the future
 [ffmpeg](https://ffmpeg.org/download.html)
