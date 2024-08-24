@@ -4,8 +4,6 @@ prefix: erm/Erm
 commands are case-insensitive
 
 chat commands:
-  gpt                prompt unhinged chat-gpt
-
   is it a beast      burger
     or a burger
     angle
@@ -32,8 +30,6 @@ sound effects:
   nerd               uhhh
   steel sting        booooooooooooooooo doooooo-doooooooooooooooooooooooooooo
   sus                amog
-  what the burger    ooo ma gad
-  what da hell       what da hell
   you are black      you, you buraku
 
 the help message category:
