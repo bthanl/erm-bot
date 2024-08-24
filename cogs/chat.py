@@ -1,9 +1,6 @@
 from discord.ext import commands
 from apiKeys import apiKeys
 import random
-import openai
-
-openai.api_key = apiKeys.openAI_key
 
 class chat(commands.Cog):
     def __init__(self, bot):
@@ -15,7 +12,7 @@ class chat(commands.Cog):
             return
 
         if message.content == 'erm...':
-            await message.channel.send("<:erm:1071525603402063894>")
+            await message.channel.send("<:erm:1098821385914167427>")
 
         if self.bot.user.mentioned_in(message):
             await message.channel.send('hiii...')
@@ -32,17 +29,9 @@ class chat(commands.Cog):
             case 1:
                 await ctx.send("its a burger angle 100 eprc on my momma")
 
-    @commands.command(aliases = ["gptb"])
-    async def gpt(self, ctx, *, p):
-        async with ctx.typing():
-            try:
-                completion = openai.Completion.create(model="text-davinci-003",prompt=p,temperature=1,max_tokens=2100)
-                await ctx.send(completion.choices[0].text)
-            except BaseException as e:
-                await ctx.send(e)
-                await ctx.send("**if it says something abtou \"Connection aborted\" or \"400 Bad Request\" just try again lol**")
-        
-    
+    @commands.command()
+    async def what(self, ctx, *, args):
+        await ctx.send(args.replace('the', '').strip() + '??!?!?')
 
 async def setup(bot):
     await bot.add_cog(chat(bot))

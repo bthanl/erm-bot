@@ -9,12 +9,12 @@ from fuzzywuzzy import fuzz
 class voice(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-
+        lastMsg = ""
     #add queue
     #support for spotify
     #api probaly
     #steal playlist
-    #search on yt 
+    #search on yt
     #low elo
 
     @commands.command()
@@ -22,10 +22,17 @@ class voice(commands.Cog):
         await player.ensureVoice(ctx, True)
 
     @commands.command()
+    async def ye(self, ctx, *, args):
+        await voice.play(self, ctx, url="kanye "+args)
+
+    @commands.command()
     async def play(self, ctx, *, url):
+        await ctx.send("youtube doesnt work my bad gangy wangy")
+        #return
+
         if not await player.ensureVoice(ctx):
             return
-
+        ctx.voice_client.stop()
         '''
         if(ctx.voice_client.is_paused()):
             ctx.voice_client.resume()
@@ -35,22 +42,26 @@ class voice(commands.Cog):
         if fuzz.ratio(url, "demondice") >= 90 or fuzz.ratio(url, "mori calliope") >= 90:
             await ctx.send("ill kill you")
             return
-        
+
         async with ctx.typing():
             source = await YTDL.YTDLSource.from_url(url, loop = self.bot.loop, stream = False)
 
-            title = (source.title).lower()
-            desc = (source.data.get("description")).lower()
-            #top 5 lines of code of all time
-            if("demondice" in title or
-                    "demondice" in desc or
-                    "mori calliope" in title or
-                    "mori calliope" in desc or
-                    "moricalliope" in title or
-                    "moricalliope" in desc):
-                await ctx.send("ill kill you")
-                return
-
+            #try cus not all sources have title and descriptions
+            try:
+                title = (source.title).lower()
+                desc = (source.data.get("description")).lower()
+                #top 5 lines of code of all time
+                if("demondice" in title or
+                        "demondice" in desc or
+                        "mori calliope" in title or
+                        "mori calliope" in desc or
+                        "moricalliope" in title or
+                        "moricalliope" in desc):
+                    await ctx.send("ill kill you")
+                    return
+            except:
+                pass
+            
             ctx.voice_client.play(source, after=lambda e: print(f'Player error: {e}') if e else None)
             
             await ctx.send(f'im playig ummm ermmmm... {source.title}')
@@ -62,7 +73,7 @@ class voice(commands.Cog):
         os.remove("temp/" + str(source.data.get("id")) + "." + str(source.data.get("ext")))
 
 
-    @commands.command()
+    @commands.command(aliases = ["skip"])
     async def stop(self, ctx):
         if ctx.voice_client.is_playing():
             await ctx.send("ogey")
@@ -92,32 +103,19 @@ class voice(commands.Cog):
         else:
             await ctx.send("i think youre schizophrenic....")
 
-    '''
     @commands.Cog.listener()
-    async def on_voice_state_update(member, prev, after):
-        #if someone joined
-        after.channel is not None:
-            return
-
-        #if bot was moved to own channel
-        if member == self.bot.user:
-
-        #if ther are 0 or 2 or more users
-        if len(member.voice.channel.members) >= 2 or len(member.voice.channel.members) == 0:
+    async def on_voice_state_update(self, member, before, after):
+        #if(self.)
+        
+        if len(before.channel.members) != 1:
             return
 
         #only the bot in channel
-        if len(member) == self.bot.user:
-            print("ayo")
-            #asyncio.sleep(300)
-
-    async def timer(member):
-        try:
-            asyncio.sleep(300)
-        except:
-            raise
-        finally:
-    '''
-
+        if before.channel.members[0] == self.bot.user:
+            #await ctx.voice_client.disconnect()
+            #print(dir(self.bot))
+            await self.bot.voice_clients[0].disconnect()
+            #ctx.send
+        
 async def setup(bot):
     await bot.add_cog(voice(bot))

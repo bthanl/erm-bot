@@ -33,13 +33,6 @@ class soundEffects(commands.Cog):
         await player.playSound(ctx, "audio/boowomp.mp3", "boowomp")
 
     @commands.command()
-    async def what(self, ctx, *, arg):
-        if arg == "the burger":
-            await player.playSound(ctx, "audio/burger.mp3", ":hamburger:")
-        elif arg == "da hell":
-            await player.playSound(ctx, "audio/hell.mp3", ":scream:")
-
-    @commands.command()
     async def steel(self, ctx, *, sting):
         if sting == "sting":
             await player.playSound(ctx, "audio/steelsting.mp3", "booooooooooooooooo doooooo-doooooooooooooooooooooooooooo")

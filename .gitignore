@@ -2,3 +2,4 @@ apiKeys.py
 __pycache__/
 dummycog.py
 test*.py
+temp/
