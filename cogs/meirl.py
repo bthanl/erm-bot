@@ -1,9 +1,8 @@
 from discord.ext import commands
 
-currentChannel = 0
-
 class meirl(commands.Cog):
     def __init__(self, bot):
+        currentChannel = 0
         self.bot = bot
 
     @commands.Cog.listener()
@@ -11,10 +10,9 @@ class meirl(commands.Cog):
         if message.author == self.bot.user:
             return
 
+        # only accept input from set channel
         if(message.channel.id != 1088099933372026982):
             return
-
-        global currentChannel
 
         if message.content.startswith("!"):
             currentChannel = int(message.content[1:])

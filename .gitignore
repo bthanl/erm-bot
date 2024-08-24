@@ -3,3 +3,4 @@ __pycache__/
 dummycog.py
 test*.py
 temp/
+.env

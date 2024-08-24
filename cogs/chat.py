@@ -1,5 +1,4 @@
 from discord.ext import commands
-from apiKeys import apiKeys
 import random
 
 class chat(commands.Cog):

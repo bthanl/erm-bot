@@ -15,24 +15,47 @@ class dev(commands.Cog):
 
     @commands.command()
     async def reload(self, ctx):
+        #only set set user execute reload command
         if(ctx.author.id != 164515512544395264):
             return
 
+        #clear screen with ansi code
+        print("\033[H\033[J", end="")
+        
         filesOld = self.files
         filesNew = dev.getCogs()
+        failed = list()
 
         for filename in filesOld:
             if filename.endswith(".py"):
-                await self.bot.unload_extension(f"cogs.{filename[:-3]}")
-                print("unloaded", filename)
+                try:
+                    await self.bot.unload_extension("cogs." + filename[:-3])
+                    print("unloaded", filename)
+                except:
+                    pass
+
+        print()
+
+        #always load this file first in case of other file failure
+        await self.bot.load_extension("cogs.dev")
+        print("loaded", "dev.py")
+        print()
 
         for filename in filesNew:
             if filename.endswith(".py"):
                 # cut off the .py from the file name
-                await self.bot.load_extension(f"cogs.{filename[:-3]}")
-                print("loaded", filename)
+                try:
+                    if(filename == "dev.py"):
+                        continue
+                    await self.bot.load_extension("cogs." + filename[:-3])
+                    print("loaded", filename)
 
-        print("finished reloading")
+                except:
+                    print("\033[91mcouldnt load " + filename + "\033[0m")
+                    failed.append(filename)
+
+
+        print("\nfinished reloading")
         diff = len(filesNew) - len(filesOld)
         if(diff >= 0):
             print("added", diff, "new cog(s)")
