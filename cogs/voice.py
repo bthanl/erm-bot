@@ -1,4 +1,5 @@
 from cogs.libs import YTDL
+from cogs.libs import cobalt
 from cogs.libs import player
 from discord.ext import commands
 import discord
@@ -27,7 +28,7 @@ class voice(commands.Cog):
 
     @commands.command()
     async def play(self, ctx, *, url):
-        await ctx.send("youtube doesnt work my bad gangy wangy")
+        #await ctx.send("youtube doesnt work my bad gangy wangy")
         #return
 
         if not await player.ensureVoice(ctx):
@@ -44,12 +45,16 @@ class voice(commands.Cog):
             return
 
         async with ctx.typing():
-            source = await YTDL.YTDLSource.from_url(url, loop = self.bot.loop, stream = False)
+            if("youtu" in url): # youtube link
+                source = await cobalt.getYT(url)
+            else:
+                source = await YTDL.YTDLSource.from_url(url, loop = self.bot.loop, stream = False)
 
             #try cus not all sources have title and descriptions
             try:
                 title = (source.title).lower()
                 desc = (source.data.get("description")).lower()
+
                 #top 5 lines of code of all time
                 if("demondice" in title or
                         "demondice" in desc or
@@ -59,6 +64,11 @@ class voice(commands.Cog):
                         "moricalliope" in desc):
                     await ctx.send("ill kill you")
                     return
+
+                if fuzz.ratio(title, "demondice") >= 90 or fuzz.ratio(url, "mori calliope") >= 90:
+                    await ctx.send("ill kill you")
+                    return
+                
             except:
                 pass
             
