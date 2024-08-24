@@ -1,3 +1,4 @@
 discord.py
 fuzzywuzzy
 yt_dlp
+python-dotenv

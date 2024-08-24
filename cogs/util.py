@@ -1,4 +1,7 @@
-import apiKeys
+import os
+from dotenv import load_dotenv, dotenv_values 
+
+load_dotenv()
 
 #curl for tenor json
 import subprocess
@@ -30,8 +33,14 @@ class util(commands.Cog):
         #check if url
 
         if util.isTenor(url):
+            tenorKey = os.getenv("TENOR_KEY")
+
+            #check for tenor key
+            if(tenorKey == ""):
+                return
+
             postID = url[-8:] #rng lol
-            tenorJson = json.loads(subprocess.check_output("curl -s https://tenor.googleapis.com/v2/posts?key=" + apiKeys.apiKeys.tenor_key + "&media_filter=gif&ids=" + postID))
+            tenorJson = json.loads(subprocess.check_output("curl -s https://tenor.googleapis.com/v2/posts?key=" + tenorKey + "&media_filter=gif&ids=" + postID))
 
             #update url to new one
             url = (tenorJson['results'][0]['media_formats']['gif']['url'])

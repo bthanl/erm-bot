@@ -1,4 +1,7 @@
-import apiKeys
+import os
+from dotenv import load_dotenv, dotenv_values 
+
+load_dotenv()
 
 import logging
 import sys
@@ -35,7 +38,7 @@ async def main():
             await bot.load_extension(f"cogs.{filename[:-3]}")
             print("loaded", filename)
         
-        await bot.start(apiKeys.apiKeys.discord_key)
+        await bot.start(os.getenv("DISCORD_KEY"))
 
 logging.basicConfig(stream=sys.stdout, level=logging.WARNING)
 
